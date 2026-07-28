@@ -130,6 +130,7 @@ function ApkPage() {
           <div className="max-w-3xl mx-auto">
             <div className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant">
               <video
+                ref={videoRef}
                 src={previewVideo.url}
                 poster={content.screenshot_url}
                 aria-label={content.screenshot_alt}
@@ -138,7 +139,10 @@ function ApkPage() {
                 loop
                 muted
                 playsInline
+                preload="auto"
+                controls={false}
               />
+
 
             </div>
           </div>
