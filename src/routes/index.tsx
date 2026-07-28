@@ -1,24 +1,66 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Header from "@/components/site/Header";
+import Hero from "@/components/site/Hero";
+import About from "@/components/site/About";
+import Services from "@/components/site/Services";
+import Trust from "@/components/site/Trust";
+import Stats from "@/components/site/Stats";
+import Team from "@/components/site/Team";
+import Realisations from "@/components/site/Realisations";
+import NosRealisations from "@/components/site/NosRealisations";
+import Reviews from "@/components/site/Reviews";
+import Shop from "@/components/site/Shop";
+import Recruit from "@/components/site/Recruit";
+import Galerie from "@/components/site/Galerie";
+import Contact from "@/components/site/Contact";
+import Footer from "@/components/site/Footer";
+import FloatingWhatsApp from "@/components/site/FloatingWhatsApp";
+import { useReveal } from "@/hooks/use-reveal";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "SCM SARL — Solution de Construction Moderne à Kinshasa" },
+      {
+        name: "description",
+        content:
+          "SCM SARL : construction, rénovation, plomberie, forage, irrigation et travaux publics en RDC. Devis gratuit sous 48h.",
+      },
+      { property: "og:title", content: "SCM SARL — Solution de Construction Moderne" },
+      {
+        property: "og:description",
+        content:
+          "Votre partenaire de confiance en RDC pour la construction, la plomberie, le forage et les travaux publics.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useReveal();
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Trust />
+        <Stats />
+        <Team />
+        <Realisations />
+        <NosRealisations />
+        <Reviews />
+        <Shop />
+        <Recruit />
+        <Galerie />
+        <Contact />
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
