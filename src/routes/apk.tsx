@@ -6,13 +6,13 @@ import Footer from "@/components/site/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import apk from "@/assets/scm-sarl.apk.asset.json";
 import shotBlue from "@/assets/scm-app-blue.jpg.asset.json";
-import previewVideo from "@/assets/scm-app-preview.mp4.asset.json";
 
 type ApkPageContent = {
   app_name: string;
   apk_url: string;
   screenshot_url: string;
   screenshot_alt: string;
+  video_data_url: string | null;
 };
 
 const fallbackContent: ApkPageContent = {
@@ -20,14 +20,15 @@ const fallbackContent: ApkPageContent = {
   apk_url: apk.url,
   screenshot_url: shotBlue.url,
   screenshot_alt: "Aperçu de l'application SCM SARL",
+  video_data_url: null,
 };
 
 async function loadApkPageContent(): Promise<ApkPageContent> {
   const { data, error } = await supabase
     .from("apk_page_content")
-    .select("app_name, apk_url, screenshot_url, screenshot_alt")
+    .select("app_name, apk_url, screenshot_url, screenshot_alt, video_data_url")
     .eq("id", "scm-sarl")
-    .maybeSingle();
+    .maybeSingle<ApkPageContent>();
 
   if (error || !data) {
     return fallbackContent;
@@ -35,6 +36,7 @@ async function loadApkPageContent(): Promise<ApkPageContent> {
 
   return data;
 }
+
 
 export const Route = createFileRoute("/apk")({
   head: () => ({
@@ -131,7 +133,7 @@ function ApkPage() {
             <div className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant">
               <video
                 ref={videoRef}
-                src={previewVideo.url}
+                src={content.video_data_url ?? undefined}
                 poster={content.screenshot_url}
                 aria-label={content.screenshot_alt}
                 className="w-full h-auto rounded-2xl shadow-card"

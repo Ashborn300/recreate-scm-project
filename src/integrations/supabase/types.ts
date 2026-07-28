@@ -22,6 +22,7 @@ export type Database = {
           screenshot_alt: string
           screenshot_url: string
           updated_at: string
+          video_data_url: string | null
         }
         Insert: {
           apk_url: string
@@ -30,6 +31,7 @@ export type Database = {
           screenshot_alt: string
           screenshot_url: string
           updated_at?: string
+          video_data_url?: string | null
         }
         Update: {
           apk_url?: string
@@ -38,6 +40,7 @@ export type Database = {
           screenshot_alt?: string
           screenshot_url?: string
           updated_at?: string
+          video_data_url?: string | null
         }
         Relationships: []
       }

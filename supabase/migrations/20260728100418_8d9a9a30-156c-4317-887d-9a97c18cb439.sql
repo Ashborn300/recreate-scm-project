@@ -1,0 +1,1 @@
+ALTER TABLE public.apk_page_content ADD COLUMN IF NOT EXISTS video_data_url text;
