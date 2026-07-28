@@ -4,7 +4,7 @@ import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import apk from "@/assets/scm-sarl.apk.asset.json";
 import shotBlue from "@/assets/scm-app-blue.jpg.asset.json";
-import shotGreen from "@/assets/scm-app-green.jpg.asset.json";
+import shotBlue from "@/assets/scm-app-blue.jpg.asset.json";
 
 export const Route = createFileRoute("/apk")({
   head: () => ({
