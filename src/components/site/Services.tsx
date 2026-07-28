@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
@@ -41,7 +41,7 @@ export default function Services() {
                   <h3 className="font-display text-xl font-bold text-primary mb-2">{s.title}</h3>
                   <p className="text-muted-foreground leading-relaxed mb-5 flex-1">{s.desc}</p>
                   <Button asChild variant="outline" className="w-full group/btn border-primary/30 hover:bg-primary hover:text-primary-foreground">
-                    <Link to={`/services/${s.slug}`} aria-label={`En savoir plus sur ${s.title}`}>
+                    <Link to="/services/$slug" params={{ slug: s.slug }} aria-label={`En savoir plus sur ${s.title}`}>
                       En savoir plus
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                     </Link>
