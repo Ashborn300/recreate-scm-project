@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { Download, Smartphone, ShieldCheck } from "lucide-react";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
