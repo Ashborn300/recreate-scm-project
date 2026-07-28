@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS public.video_chunks_tmp;
