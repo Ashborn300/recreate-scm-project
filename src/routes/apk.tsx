@@ -133,7 +133,7 @@ function ApkPage() {
             <div className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant">
               <video
                 ref={videoRef}
-                src={previewVideo.url}
+                src={content.video_data_url ?? undefined}
                 poster={content.screenshot_url}
                 aria-label={content.screenshot_alt}
                 className="w-full h-auto rounded-2xl shadow-card"
