@@ -26,11 +26,11 @@ export const Route = createFileRoute("/")({
         content:
           "SCM SARL : construction, rénovation, plomberie, forage, irrigation et travaux publics en RDC. Devis gratuit sous 48h.",
       },
-      { property: "og:title", content: "SCM SARL — Solution de Construction Moderne" },
+      { property: "og:title", content: "SCM SARL — Solution de Construction Moderne à Kinshasa" },
       {
         property: "og:description",
         content:
-          "Votre partenaire de confiance en RDC pour la construction, la plomberie, le forage et les travaux publics.",
+          "SCM SARL : construction, rénovation, plomberie, forage, irrigation et travaux publics en RDC. Devis gratuit sous 48h.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
