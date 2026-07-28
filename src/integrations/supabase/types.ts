@@ -44,6 +44,21 @@ export type Database = {
         }
         Relationships: []
       }
+      video_chunks_tmp: {
+        Row: {
+          chunk: string
+          seq: number
+        }
+        Insert: {
+          chunk: string
+          seq: number
+        }
+        Update: {
+          chunk?: string
+          seq?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
