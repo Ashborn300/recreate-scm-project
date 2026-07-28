@@ -136,7 +136,7 @@ function ApkPage() {
                 src={content.video_data_url ?? undefined}
                 poster={content.screenshot_url}
                 aria-label={content.screenshot_alt}
-                className="w-full h-auto rounded-2xl shadow-card"
+                className="block mx-auto w-full h-auto max-h-[75vh] object-contain rounded-2xl shadow-card"
                 autoPlay
                 loop
                 muted
