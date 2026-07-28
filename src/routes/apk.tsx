@@ -5,6 +5,7 @@ import Footer from "@/components/site/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import apk from "@/assets/scm-sarl.apk.asset.json";
 import shotBlue from "@/assets/scm-app-blue.jpg.asset.json";
+import previewVideo from "@/assets/scm-app-preview.mp4.asset.json";
 
 type ApkPageContent = {
   app_name: string;
@@ -97,12 +98,17 @@ function ApkPage() {
           {/* Screenshot */}
           <div className="max-w-3xl mx-auto">
             <div className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant">
-              <img
-                src={content.screenshot_url}
-                alt={content.screenshot_alt}
+              <video
+                src={previewVideo.url}
+                poster={content.screenshot_url}
+                aria-label={content.screenshot_alt}
                 className="w-full h-auto rounded-2xl shadow-card"
-                loading="eager"
+                autoPlay
+                loop
+                muted
+                playsInline
               />
+
             </div>
           </div>
 
