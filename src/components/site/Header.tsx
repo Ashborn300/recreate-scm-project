@@ -50,7 +50,7 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://scmdarabase.lovable.app/employe"
+            href="https://scmsar.netlify.app/employe"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center h-11 px-5 rounded-md bg-green-600 hover:bg-green-700 text-white font-semibold text-sm shadow-card hover:shadow-elegant transition-spring hover:scale-105"
