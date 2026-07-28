@@ -61,6 +61,36 @@ export const Route = createFileRoute("/apk")({
 
 function ApkPage() {
   const content = Route.useLoaderData();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    const tryPlay = () => {
+      const p = video.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+    tryPlay();
+    const onCanPlay = () => tryPlay();
+    const onVisible = () => {
+      if (document.visibilityState === "visible") tryPlay();
+    };
+    video.addEventListener("canplay", onCanPlay);
+    document.addEventListener("visibilitychange", onVisible);
+    const onFirstInteract = () => tryPlay();
+    window.addEventListener("touchstart", onFirstInteract, { once: true, passive: true });
+    window.addEventListener("click", onFirstInteract, { once: true });
+    return () => {
+      video.removeEventListener("canplay", onCanPlay);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("touchstart", onFirstInteract);
+      window.removeEventListener("click", onFirstInteract);
+    };
+  }, []);
+
 
   return (
     <div className="min-h-screen bg-background">
