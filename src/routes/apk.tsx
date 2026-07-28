@@ -2,8 +2,37 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Download, Smartphone, ShieldCheck } from "lucide-react";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
+import { supabase } from "@/integrations/supabase/client";
 import apk from "@/assets/scm-sarl.apk.asset.json";
 import shotBlue from "@/assets/scm-app-blue.jpg.asset.json";
+
+type ApkPageContent = {
+  app_name: string;
+  apk_url: string;
+  screenshot_url: string;
+  screenshot_alt: string;
+};
+
+const fallbackContent: ApkPageContent = {
+  app_name: "SCM SARL",
+  apk_url: apk.url,
+  screenshot_url: shotBlue.url,
+  screenshot_alt: "Aperçu de l'application SCM SARL",
+};
+
+async function loadApkPageContent(): Promise<ApkPageContent> {
+  const { data, error } = await supabase
+    .from("apk_page_content")
+    .select("app_name, apk_url, screenshot_url, screenshot_alt")
+    .eq("id", "scm-sarl")
+    .maybeSingle();
+
+  if (error || !data) {
+    return fallbackContent;
+  }
+
+  return data;
+}
 
 export const Route = createFileRoute("/apk")({
   head: () => ({
@@ -24,10 +53,13 @@ export const Route = createFileRoute("/apk")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  loader: loadApkPageContent,
   component: ApkPage,
 });
 
 function ApkPage() {
+  const content = Route.useLoaderData();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -48,7 +80,7 @@ function ApkPage() {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
-                href={apk.url}
+                href={content.apk_url}
                 download="scm-sarl.apk"
                 className="inline-flex items-center justify-center gap-2 h-14 px-8 rounded-xl bg-primary hover:bg-primary-glow text-primary-foreground font-semibold shadow-glow transition-spring hover:scale-105 w-full sm:w-auto"
               >
@@ -66,8 +98,8 @@ function ApkPage() {
           <div className="max-w-3xl mx-auto">
             <div className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant">
               <img
-                src={shotBlue.url}
-                alt="Aperçu de l'application SCM SARL"
+                src={content.screenshot_url}
+                alt={content.screenshot_alt}
                 className="w-full h-auto rounded-2xl shadow-card"
                 loading="eager"
               />
