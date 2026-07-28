@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { Download, Smartphone, ShieldCheck } from "lucide-react";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
@@ -60,6 +61,36 @@ export const Route = createFileRoute("/apk")({
 
 function ApkPage() {
   const content = Route.useLoaderData();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    const tryPlay = () => {
+      const p = video.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+    tryPlay();
+    const onCanPlay = () => tryPlay();
+    const onVisible = () => {
+      if (document.visibilityState === "visible") tryPlay();
+    };
+    video.addEventListener("canplay", onCanPlay);
+    document.addEventListener("visibilitychange", onVisible);
+    const onFirstInteract = () => tryPlay();
+    window.addEventListener("touchstart", onFirstInteract, { once: true, passive: true });
+    window.addEventListener("click", onFirstInteract, { once: true });
+    return () => {
+      video.removeEventListener("canplay", onCanPlay);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("touchstart", onFirstInteract);
+      window.removeEventListener("click", onFirstInteract);
+    };
+  }, []);
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -99,6 +130,7 @@ function ApkPage() {
           <div className="max-w-3xl mx-auto">
             <div className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant">
               <video
+                ref={videoRef}
                 src={previewVideo.url}
                 poster={content.screenshot_url}
                 aria-label={content.screenshot_alt}
@@ -107,7 +139,10 @@ function ApkPage() {
                 loop
                 muted
                 playsInline
+                preload="auto"
+                controls={false}
               />
+
 
             </div>
           </div>
