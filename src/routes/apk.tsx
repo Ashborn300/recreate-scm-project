@@ -5,6 +5,7 @@ import Footer from "@/components/site/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import apk from "@/assets/scm-sarl.apk.asset.json";
 import shotBlue from "@/assets/scm-app-blue.jpg.asset.json";
+import previewVideo from "@/assets/scm-app-preview.mp4.asset.json";
 
 type ApkPageContent = {
   app_name: string;
