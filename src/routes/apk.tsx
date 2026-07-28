@@ -62,21 +62,16 @@ function ApkPage() {
             </div>
           </div>
 
-          {/* Screenshots */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-5xl mx-auto">
-            {[shotGreen, shotBlue].map((img, i) => (
-              <div
-                key={i}
-                className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant"
-              >
-                <img
-                  src={img.url}
-                  alt={`Aperçu de l'application SCM SARL ${i + 1}`}
-                  className="w-full h-auto rounded-2xl shadow-card"
-                  loading={i === 0 ? "eager" : "lazy"}
-                />
-              </div>
-            ))}
+          {/* Screenshot */}
+          <div className="max-w-3xl mx-auto">
+            <div className="rounded-3xl overflow-hidden bg-gradient-blue-soft p-4 sm:p-6 shadow-elegant">
+              <img
+                src={shotBlue.url}
+                alt="Aperçu de l'application SCM SARL"
+                className="w-full h-auto rounded-2xl shadow-card"
+                loading="eager"
+              />
+            </div>
           </div>
 
           {/* Install instructions */}
