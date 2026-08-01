@@ -10,7 +10,7 @@ import Realisations from "@/components/site/Realisations";
 import NosRealisations from "@/components/site/NosRealisations";
 import Reviews from "@/components/site/Reviews";
 import Shop from "@/components/site/Shop";
-import Recruit from "@/components/site/Recruit";
+
 import Galerie from "@/components/site/Galerie";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
@@ -55,7 +55,7 @@ function Index() {
         <NosRealisations />
         <Reviews />
         <Shop />
-        <Recruit />
+        
         <Galerie />
         <Contact />
       </main>
