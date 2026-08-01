@@ -12,6 +12,7 @@ import Reviews from "@/components/site/Reviews";
 import Shop from "@/components/site/Shop";
 
 import Galerie from "@/components/site/Galerie";
+import Carrieres from "@/components/site/Carrieres";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
 import FloatingWhatsApp from "@/components/site/FloatingWhatsApp";
