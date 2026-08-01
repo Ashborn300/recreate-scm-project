@@ -59,6 +59,7 @@ function Index() {
         
         <Galerie />
         <Carrieres />
+        <Contact />
       </main>
       <Footer />
       <FloatingWhatsApp />
