@@ -9,10 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StageRouteImport } from './routes/stage'
+import { Route as EmploiRouteImport } from './routes/emploi'
 import { Route as ApkRouteImport } from './routes/apk'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
+const StageRoute = StageRouteImport.update({
+  id: '/stage',
+  path: '/stage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmploiRoute = EmploiRouteImport.update({
+  id: '/emploi',
+  path: '/emploi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApkRoute = ApkRouteImport.update({
   id: '/apk',
   path: '/apk',
@@ -32,35 +44,57 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/apk': typeof ApkRoute
+  '/emploi': typeof EmploiRoute
+  '/stage': typeof StageRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/apk': typeof ApkRoute
+  '/emploi': typeof EmploiRoute
+  '/stage': typeof StageRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/apk': typeof ApkRoute
+  '/emploi': typeof EmploiRoute
+  '/stage': typeof StageRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/apk' | '/services/$slug'
+  fullPaths: '/' | '/apk' | '/emploi' | '/stage' | '/services/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apk' | '/services/$slug'
-  id: '__root__' | '/' | '/apk' | '/services/$slug'
+  to: '/' | '/apk' | '/emploi' | '/stage' | '/services/$slug'
+  id: '__root__' | '/' | '/apk' | '/emploi' | '/stage' | '/services/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApkRoute: typeof ApkRoute
+  EmploiRoute: typeof EmploiRoute
+  StageRoute: typeof StageRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/stage': {
+      id: '/stage'
+      path: '/stage'
+      fullPath: '/stage'
+      preLoaderRoute: typeof StageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emploi': {
+      id: '/emploi'
+      path: '/emploi'
+      fullPath: '/emploi'
+      preLoaderRoute: typeof EmploiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/apk': {
       id: '/apk'
       path: '/apk'
@@ -88,18 +122,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApkRoute: ApkRoute,
+  EmploiRoute: EmploiRoute,
+  StageRoute: StageRoute,
   ServicesSlugRoute: ServicesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
